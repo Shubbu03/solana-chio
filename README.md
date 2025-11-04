@@ -46,8 +46,11 @@ cargo install --git https://github.com/4rjunc/solana-chio --force
 ### Available Commands
 
 ```bash
-# Initialize a new project
+# Initialize a new project (default tests: mollusk)
 chio init <project-name>
+
+# Use LiteSVM tests instead of Mollusk
+chio init <project-name> --test-framework litesvm
 
 # Build your project
 chio build
@@ -79,6 +82,11 @@ chio build
 # Run tests
 chio test
 
+# LiteSVM example
+chio init my-pinocchio-app --test-framework litesvm
+cd my-pinocchio-app
+cargo build-sbf
+cargo test --features std -- --no-capture
 ```
 
 
@@ -104,6 +112,8 @@ my-project/
 └── tests/                   # Test files
     └── tests.rs
 ```
+
+- If initialized with `--test-framework litesvm`, tests are placed under `src/tests/` and `lib.rs` exposes `#[cfg(all(test, feature = "std"))] pub mod tests;`.
 
 
 ## Contributing
