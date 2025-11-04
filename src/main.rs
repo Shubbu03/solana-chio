@@ -151,10 +151,7 @@ fn init_project(project_name: &str) -> Result<()> {
                     
  "#
     );
-    println!(
-        "🧑🏻‍🍳 Initializing your pinocchio project: {}",
-        project_name
-    );
+    println!("🧑🏻‍🍳 Initializing your pinocchio project: {}", project_name);
     println!(""); // Create the project directory
     let project_dir = Path::new(project_name);
     fs::create_dir_all(project_dir)
@@ -380,16 +377,16 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-pinocchio = "0.8.4"
-pinocchio-log = "0.4.0"
-pinocchio-pubkey = "0.2.4"
-pinocchio-system = "0.2.3"
-shank = "0.4.2"
+pinocchio = "0.9.2"
+pinocchio-log = "0.5.1"
+pinocchio-pubkey = "0.3.0"
+pinocchio-system = "0.3.0"
+shank = "0.4.5"
 
 [dev-dependencies]
-solana-sdk = "2.2.1"
-mollusk-svm = "0.2.0"
-mollusk-svm-bencher = "0.2.0" 
+solana-sdk = "3.0.0"
+mollusk-svm = "0.7.0"
+mollusk-svm-bencher = "0.7.0" 
 
 [features]
 no-entrypoint = []
