@@ -4,8 +4,8 @@ use std::fs;
 use std::path::Path;
 use std::process::Command;
 
-mod content;
-use content::templates;
+use chio::content::templates;
+use chio::is_valid_project_name;
 
 #[derive(Copy, Clone, Eq, PartialEq, Debug, ValueEnum)]
 enum TestFramework {
@@ -123,11 +123,11 @@ fn display_help_banner() -> Result<()> {
     // banner
     println!(
         r#"
-      *     *       
-  ___| |__ (_) ___  
- / __| '_ \| |/ _ \ 
+      *     *
+  ___| |__ (_) ___
+ / __| '_ \| |/ _ \
 | (__| | | | | (_) |
- \___|_| |_|_|\___/ 
+ \___|_| |_|_|\___/
  "#
     );
 
@@ -154,12 +154,12 @@ fn init_project(project_name: &str, test_framework: TestFramework) -> Result<()>
 
     println!(
         r#"
-      *     *       
-  ___| |__ (_) ___  
- / __| '_ \| |/ _ \ 
+      *     *
+  ___| |__ (_) ___
+ / __| '_ \| |/ _ \
 | (__| | | | | (_) |
- \___|_| |_|_|\___/ 
-                    
+ \___|_| |_|_|\___/
+
  "#
     );
     println!("🧑🏻‍🍳 Initializing your pinocchio project: {}", project_name);
@@ -261,15 +261,6 @@ fn init_project(project_name: &str, test_framework: TestFramework) -> Result<()>
     println!("");
 
     Ok(())
-}
-
-/// validates that the project name only contains alphanumeric characters and underscores
-fn is_valid_project_name(name: &str) -> bool {
-    if name.is_empty() {
-        return false;
-    }
-
-    name.chars().all(|c| c.is_alphanumeric() || c == '_')
 }
 
 fn init_git_repo(project_dir: &Path, project_name: &str) -> Result<()> {
@@ -417,7 +408,7 @@ fn update_cargo_toml(
 [dev-dependencies]
 solana-sdk = "3.0.0"
 mollusk-svm = "0.7.0"
-mollusk-svm-bencher = "0.7.0" 
+mollusk-svm-bencher = "0.7.0"
 "#
         }
         TestFramework::Litesvm => {

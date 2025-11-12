@@ -68,7 +68,7 @@ A Solana program built with the Chio CLI tool.
 src/
 ├── entrypoint.rs          # Program entry point with nostd_panic_handler
 ├── lib.rs                 # Library crate (no_std optimization)
-├── instructions/          # Program instruction handlers  
+├── instructions/          # Program instruction handlers
 ├── states/                # Account state definitions
 │   └── utils.rs           # State management helpers (load_acc, load_mut_acc)
 └── errors.rs              # Program error definitions
@@ -81,16 +81,16 @@ tests/
 
 ```bash
 # Build the program
-chio build
+ chio build
 
 # Run tests
-chio test
+ chio test
 
 # Deploy the program
-chio deploy
+ chio deploy
 
 # Get help
-chio help
+ chio help
 ```
 
 ---
@@ -117,7 +117,7 @@ impl From<MyProgramError> for ProgramError {
     fn from(e: MyProgramError) -> Self {
         Self::Custom(e as u32)
     }
-}       
+}
 "#
     }
 
