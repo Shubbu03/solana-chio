@@ -68,7 +68,7 @@ A Solana program built with the Chio CLI tool.
 src/
 ├── entrypoint.rs          # Program entry point with nostd_panic_handler
 ├── lib.rs                 # Library crate (no_std optimization)
-├── instructions/          # Program instruction handlers  
+├── instructions/          # Program instruction handlers
 ├── states/                # Account state definitions
 │   └── utils.rs           # State management helpers (load_acc, load_mut_acc)
 └── errors.rs              # Program error definitions
@@ -81,16 +81,16 @@ tests/
 
 ```bash
 # Build the program
-chio build
+ chio build
 
 # Run tests
-chio test
+ chio test
 
 # Deploy the program
-chio deploy
+ chio deploy
 
 # Get help
-chio help
+ chio help
 ```
 
 ---
@@ -101,6 +101,60 @@ chio help
     pub fn gitignore() -> &'static str {
         r#"/target
 .env"#
+    }
+
+    pub fn cargo_toml_mollusk(project_name: &str) -> String {
+        format!(
+            r#"[package]
+name = "{}"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pinocchio = "0.9.2"
+
+[dev-dependencies]
+solana-sdk = "3.0.0"
+mollusk-svm = "0.7.0"
+mollusk-svm-bencher = "0.7.0"
+
+[features]
+no-entrypoint = []
+std = []
+test-default = ["no-entrypoint", "std"]
+"#,
+            project_name
+        )
+    }
+
+    pub fn cargo_toml_litesvm(project_name: &str) -> String {
+        format!(
+            r#"[package]
+name = "{}"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pinocchio = "0.9.2"
+
+[dev-dependencies]
+solana-sdk = "3.0.0"
+litesvm = "0.8.1"
+litesvm-token = "0.8.1"
+
+[features]
+no-entrypoint = []
+std = []
+test-default = ["no-entrypoint", "std"]
+"#,
+            project_name
+        )
     }
 
     pub fn errors_rs() -> &'static str {
@@ -117,7 +171,7 @@ impl From<MyProgramError> for ProgramError {
     fn from(e: MyProgramError) -> Self {
         Self::Custom(e as u32)
     }
-}       
+}
 "#
     }
 
